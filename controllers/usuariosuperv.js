@@ -13,9 +13,7 @@ export const criarTabelaUsuariosuperv = () => {
     mat_id int,
     unique(auth_uid),
     FOREIGN KEY(pessoa_id) REFERENCES pessoa(pessoa_id),
-    FOREIGN KEY(tipo_user_id) REFERENCES tipo_usuario(tipo_user_id),
-   
-    
+    FOREIGN KEY(tipo_user_id) REFERENCES tipo_usuario(tipo_user_id)
 );
 `
   db.query(q, (error) => {
@@ -58,7 +56,7 @@ export const getUser = (req, res) => {
 export const add = (req, res) => {
   const q = `
     INSERT INTO usuario_operador(auth_uid,login, senha, repete_senha, pessoa_id, tipo_user_id, mat_id, id) 
-VALUES ('${req.body.auth_uid}', '${req.body.login}', '${req.body.senha}' , '${req.body.repete_senha}' , ${req.body.pessoa_id}, ${req.body.tipo_user_id}, ${req.body.mat_id});
+VALUES ('${req.body.auth_uid}', '${req.body.login}', '${req.body.senha}' , '${req.body.repete_senha}' , ${req.body.pessoa_id}, ${req.body.tipo_user_id});
 `;
   db.query(q, (err) => {
     console.log(q);
