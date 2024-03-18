@@ -10,7 +10,6 @@ export const criarTabelaUsuariosuperv = () => {
     repete_senha VARCHAR(100),
     pessoa_id int,
     tipo_user_id  int,
-    mat_id int,
     unique(auth_uid),
     FOREIGN KEY(pessoa_id) REFERENCES pessoa(pessoa_id),
     FOREIGN KEY(tipo_user_id) REFERENCES tipo_usuario(tipo_user_id)

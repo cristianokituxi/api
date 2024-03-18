@@ -10,7 +10,6 @@ export const criarTabelaFuncao = () => {
     dep_id int,
     unique(nome),
     FOREIGN KEY(dep_id) REFERENCES departamento(dep_id)
-
   );
 `
   db.query(q, (error) => {

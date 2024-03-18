@@ -3,7 +3,7 @@ import { db } from "../db.js";
 export const criarTabelaPessoa = () => {
   const q = `
   CREATE TABLE IF NOT EXISTS pessoa (
-    id SERIAL PRIMARY KEY
+    id SERIAL PRIMARY KEY,
     nome VARCHAR(30),
     sobrenome VARCHAR(70),
     nome_pai VARCHAR(50),
