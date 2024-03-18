@@ -12,7 +12,7 @@ export const criarTabelaUsuariosuperv = () => {
     tipo_user_id  int,
     unique(auth_uid),
     FOREIGN KEY(pessoa_id) REFERENCES pessoa(pessoa_id),
-    FOREIGN KEY(tipo_user_id) REFERENCES tipo_usuario(tipo_user_id)
+    FOREIGN KEY(tipo_user_id) REFERENCES tipo_usuario(id)
 );
 `
   db.query(q, (error) => {
