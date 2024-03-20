@@ -3,7 +3,8 @@ import { db } from "../db.js";
 export const criarTabelaPessoa = () => {
   const q = `
   CREATE TABLE IF NOT EXISTS pessoa (
-    id SERIAL PRIMARY KEY,
+    id VARCHAR(10),
+    pessoa_id SERIAL PRIMARY KEY,
     nome VARCHAR(30),
     sobrenome VARCHAR(70),
     nome_pai VARCHAR(50),
@@ -53,13 +54,13 @@ export const get = (_, res) => {
 export const add = (req, res) => {
   console.log(req, "aqui olha");
   const q = `
-    INSERT INTO pessoa(nome, sobrenome, nome_pai, nome_mae, rg, cpf, email, celular, celular_recado, data_nascimento, data_cadastro,cep, casa_numero, rua , bairro, cidade, estado, complemento) 
+    INSERT INTO pessoa(nome, sobrenome, nome_pai, nome_mae, rg, cpf, email, celular, celular_recado, data_nascimento, data_cadastro,cep, casa_numero, rua , bairro, cidade, estado, complemento, id) 
 VALUES ('${req.body.nome}', '${req.body.sobrenome}', '${req.body.nome_pai}' ,
  '${req.body.nome_mae}' , '${req.body.rg}', '${req.body.cpf}', 
  '${req.body.email}','${req.body.celular}','${req.body.celular_recado}',
  '${req.body.data_nascimento}', CURRENT_TIMESTAMP, '${req.body.zipCode}', '${req.body.number}', 
  '${req.body.addressName}', '${req.body.neighborhood}', '${req.body.city}', 
- '${req.body.state}' , '${req.body.complement}'
+ '${req.body.state}' , '${req.body.complement}','${req.body.id}'
  
  );
 `;

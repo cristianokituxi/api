@@ -1,12 +1,9 @@
 import express from "express";
-import { add,  delet, get, update, getUser, criarTabelaUsuarioper } from "../controllers/usuariosuperv.js";
-
+import { add, criarTabelaEndereco, delet, get, update } from "../controllers/endereco.js";
 
 const router = express.Router()
-criarTabelaUsuarioper();
+criarTabelaEndereco();
 router.get("/get", get)
-
-router.get("/get:id", getUser)
 
 router.post("/add", add)
 

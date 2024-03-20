@@ -10,6 +10,7 @@ export const criarTabelaFuncao = () => {
     dep_id int,
     unique(nome),
     FOREIGN KEY(dep_id) REFERENCES departamento(dep_id)
+
   );
 `
   db.query(q, (error) => {
@@ -39,7 +40,7 @@ export const add = (req, res) => {
   console.log(req)
   const q = `
     INSERT INTO funcao(nome, descricao, dep_id) 
-VALUES ('${req.body.nome}', '${req.body.descricao}');
+VALUES ('${req.body.nome}', '${req.body.descricao}', ${req.body.dep_id});
 `;
   db.query(q, (err) => {
     console.log(q);

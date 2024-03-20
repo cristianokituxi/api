@@ -1,12 +1,10 @@
 import express from "express";
-import { add,  delet, get, update, getUser, criarTabelaUsuarioper } from "../controllers/usuariosuperv.js";
+import { add,  delet, get,criarTabelaRelatorio, update } from "../controllers/relatorio.js";
 
 
 const router = express.Router()
-criarTabelaUsuarioper();
+ criarTabelaRelatorio();
 router.get("/get", get)
-
-router.get("/get:id", getUser)
 
 router.post("/add", add)
 

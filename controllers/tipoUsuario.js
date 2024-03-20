@@ -3,7 +3,8 @@ import { db } from "../db.js";
 export const criarTabelaTipoUsuario = () => {
   const q = `
   CREATE TABLE IF NOT EXISTS   tipo_usuario (
-    id SERIAL PRIMARY KEY,
+    tipo_user_id   SERIAL PRIMARY KEY,
+    id varchar(10),
     nome VARCHAR(50) NOT NULL,
     descricao VARCHAR(50) 
   );
@@ -34,7 +35,7 @@ export const get = (_, res) => {
 export const add = (req, res) => {
   const q = `
     INSERT INTO tipo_usuario (nome, descricao, id) 
-VALUES ('${req.body.nome}', '${req.body.descricao}');
+VALUES ('${req.body.nome}', '${req.body.descricao}', '${req.body.id}');
 `;
   db.query(q, (err) => {
     console.log(q);
