@@ -2,7 +2,7 @@ import { db } from "../db.js";
 
 export const criarTabelaUsuario = () => {
   const q = `
-  CREATE TABLE IF NOT EXISTS  usuario (
+  CREATE TABLE IF NOT EXISTS  usuariop (
     usuario_id  SERIAL PRIMARY KEY,
     id varchar(10),
     auth_uid VARCHAR(50),

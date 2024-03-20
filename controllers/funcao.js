@@ -2,7 +2,7 @@ import { db } from "../db.js";
 
 export const criarTabelaFuncao = () => {
   const q = `
-  CREATE TABLE IF NOT EXISTS funcao (
+  CREATE TABLE IF NOT EXISTS funcaop (
     id varchar(10),
     func_id  SERIAL PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,

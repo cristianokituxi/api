@@ -2,7 +2,7 @@ import { db } from "../db.js";
 
 export const criarTabelaEndereco = () => {
   const q = `
-  CREATE TABLE IF NOT EXISTS  endereco (
+  CREATE TABLE IF NOT EXISTS  enderecop (
     id varchar(10),
     end_id  SERIAL PRIMARY KEY,
     cep varchar(50),
