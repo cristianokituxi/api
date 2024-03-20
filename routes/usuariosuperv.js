@@ -1,9 +1,9 @@
 import express from "express";
-import { add,  delet, get, update, getUser, criarTabelaUsuarioper } from "../controllers/usuariosuperv.js";
+import { add,  delet, get, update, getUser, criarTabelaUsuariosuperv } from "../controllers/usuariosuperv.js";
 
 
 const router = express.Router()
-criarTabelaUsuarioper();
+criarTabelaUsuariosuperv();
 router.get("/get", get)
 
 router.get("/get:id", getUser)
