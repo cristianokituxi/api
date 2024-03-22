@@ -3,13 +3,13 @@ import { db } from "../db.js";
 export const criarTabelaVendedor = () => {
   const q = `
   CREATE TABLE IF NOT EXISTS  usuario_vendedor (
-   
-    id SERIAL PRIMARY KEY
+    id SERIAL PRIMARY KEY,
+    nome   VARCHAR(50),
+    sobrenome  VARCHAR(50),
     auth_uid VARCHAR(50),
     login VARCHAR(100),
     senha VARCHAR(100),
-    repete_senha VARCHAR(100),
-   
+    repete_senha VARCHAR(100), 
 );
 `
   db.query(q, (error) => {
@@ -52,7 +52,7 @@ export const getUser = (req, res) => {
 export const add = (req, res) => {
   const q = `
     INSERT INTO usuario_operador(auth_uid, nome, sobrenome, login, senha, repete_senha) 
-    VALUES ('${req.body.auth_uid}', '${req.body.nome}' , '${req.body.sobrenome}', '${req.body.login}' , '${req.body.repete_senha}');
+    VALUES ('${req.body.auth_uid}', '${req.body.nome}' , '${req.body.sobrenome}', '${req.body.login}' , '${req.body.senha}', '${req.body.repete_senha}');
 `;
   db.query(q, (err) => {
     console.log(q);

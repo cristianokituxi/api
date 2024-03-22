@@ -3,16 +3,13 @@ import { db } from "../db.js";
 export const criarTabelaUsuario = () => {
   const q = `
   CREATE TABLE IF NOT EXISTS  usuario_produtor (
-    id  SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
+    nome  VARCHAR(50),
+    sobrenome  VARCHAR(50),
     auth_uid VARCHAR(50),
     login VARCHAR(100),
     senha VARCHAR(100),
-    repete_senha VARCHAR(100),
-    pessoa_id int,
-    tipo_user_id  int,
-    unique(auth_uid),
-    FOREIGN KEY(pessoa_id) REFERENCES pessoa(pessoa_id),
-    FOREIGN KEY(tipo_user_id) REFERENCES tipo_usuario(tipo_user_id)  
+    repete_senha VARCHAR(100)
 );
 `
   db.query(q, (error) => {
