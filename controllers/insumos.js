@@ -2,15 +2,10 @@ import { db } from "../db.js";
 
 export const criarInsumos = () => {
   const q = `
-  CREATE TABLE IF NOT EXISTS  insumos (
+  CREATE TABLE IF NOT EXISTS  insumos(
     id SERIAL PRIMARY KEY,
-    usuario_id  int,
-    nome  VARCHAR(50) NOT NULL,
     segmento  VARCHAR(50) NOT NULL,
     produto  VARCHAR(50) NOT NULL,
-    data    Date,
-    negociado  VARCHAR(30), 
-    FOREIGN KEY(usuario_id) REFERENCES usuario(id)
   );
 `
   db.query(q, (error) => {
@@ -38,8 +33,8 @@ export const get = (_, res) => {
 
 export const add = (req, res) => {
   const q = `
-    INSERT INTO insumos(usuario_id,segmento, produto , nome ) 
-VALUES (${req.body.usuario_id},'${req.body.segmento}', '${req.body.produto}','${req.body.nome}', CURRENT_DATE,);
+    INSERT INTO insumos(segmento, produto) 
+VALUES ('${req.body.segmento}', '${req.body.produto}');
 `;
   db.query(q, (err) => {
     console.log(q);
