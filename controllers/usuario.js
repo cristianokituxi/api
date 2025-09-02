@@ -1,15 +1,15 @@
 import { db } from "../db.js";
 
+
 export const criarTabelaUsuario = () => {
   const q = `
-  CREATE TABLE IF NOT EXISTS  usuario_produtor (
+  CREATE TABLE IF NOT EXISTS usuarios (
     id SERIAL PRIMARY KEY,
     nome  VARCHAR(50),
     sobrenome  VARCHAR(50),
-    auth_uid VARCHAR(50),
     login VARCHAR(100),
     senha VARCHAR(100),
-    repete_senha VARCHAR(100)
+    role VARCHAR(50) DEFAULT 'user'
 );
 `
   db.query(q, (error) => {
