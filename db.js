@@ -17,15 +17,10 @@
 // }); 
 
 
-import database from "pg"
-import * as dotenv from "dotenv" 
+import database from "pg";
+import * as dotenv from "dotenv";
 
 dotenv.config();
-const environment = process.env.NODE_ENV || 'development';
-
-dotenv.config({ path: `.env.${environment}` });
-
-
 
 export const db = new database.Pool({
   connectionString: process.env.DATABASE_URL,
