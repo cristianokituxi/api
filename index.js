@@ -7,23 +7,28 @@ import presencaRoutes from "./routes/presenca.js"
 import authRoutes from "./routes/auth.js"
 const app = express()
 
-var whitelist = ['https://admin.casaraodasartespedra90.com.br/']
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
+// var whitelist = [
+//   'https://admin.casaraodasartespedra90.com.br',
+//   'http://localhost:3000' // se quiser testar local
+// ];
+// var corsOptions = {
+//   origin: function (origin, callback) {
+//     // Permite requisições sem origin (ex: Postman, localhost)
+//     if (!origin || whitelist.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   credentials: true
+// }
 
 app.use(express.json())
-app.use(cors(corsOptions))
-app.use("/aluno", alunoRoutes)
-app.use("/aula", aulaRoutes)
-app.use("/inscricao", inscricaoRoutes)
-app.use("/presenca", presencaRoutes)
+app.use(cors())
+app.use("/alunos", alunoRoutes)
+app.use("/aulas", aulaRoutes)
+app.use("/inscricoes", inscricaoRoutes)
+app.use("/presencas", presencaRoutes)
 app.use("/auth", authRoutes)
 
 
