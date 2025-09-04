@@ -25,15 +25,11 @@ export const criarTabelaUsuario = () => {
 };
 
 export const get = (_, res) => {
-  const q = "SELECT * FROM usuario"
-
-  db.query(q, (err, data) => {
+  db.query("SELECT * FROM usuarios", (err, data) => {
     if (err) return res.json(err);
-
-    return res.status(200).json(data);
+    return res.status(200).json({ usuarios: data?.rows || data, message: "Consulta de usuários realizada com sucesso!" });
   });
 };
-
 
 export const getUser = (req, res) => {
   const q = `select * from usuario u
@@ -49,44 +45,34 @@ export const getUser = (req, res) => {
 };
 
 
-export const add = (req, res) => {
-  const q = `
-    INSERT INTO usuario(auth_uid,login, senha, repete_senha, pessoa_id, tipo_user_id, mat_id, id) 
-VALUES ('${req.body.auth_uid}', '${req.body.login}', '${req.body.senha}' , '${req.body.repete_senha}' , ${req.body.pessoa_id}, ${req.body.tipo_user_id}, ${req.body.mat_id}, ${req.body.id});
-`;
+export const add = async (req, res) => {
+  const { email, nome, sobrenome, senha, role } = req.body;
+  const hash = await bcrypt.hash(senha, 10);
+  const q = `INSERT INTO usuarios (email, nome, sobrenome, senha, role) VALUES ('${email}', '${nome}', '${sobrenome}', '${hash}', '${role || 'user'}');`;
   db.query(q, (err) => {
-    console.log(q);
-
     if (err) return res.json(err);
-
-    return res.status(200).json("usuario prima criado com sucesso.");
+    return res.status(200).json({ usuarios: null, message: "Usuário criado com sucesso!" });
   });
 };
 
 
-export const update = (req, res) => {
-  const q =
-    `UPDATE usuario SET  tipo_user_id = '${req.body.tipo_user_id}', mat_id = '${req.body.mat_id}'
-     WHERE id = ${req.params.id}`
-
-
-
+export const update = async (req, res) => {
+  const { email, nome, sobrenome, senha, role } = req.body;
+  let senhaUpdate = "";
+  if (senha) {
+    const hash = await bcrypt.hash(senha, 10);
+    senhaUpdate = `, senha='${hash}'`;
+  }
+  const q = `UPDATE usuarios SET email='${email}', nome='${nome}', sobrenome='${sobrenome}', role='${role || 'user'}'${senhaUpdate} WHERE id = ${req.params.id}`;
   db.query(q, (err) => {
-
-
     if (err) return res.json(err);
-
-    return res.status(200).json("Materia atualizado com sucesso.");
+    return res.status(200).json({ usuarios: null, message: "Usuário atualizado com sucesso!" });
   });
 };
 
 export const delet = (req, res) => {
-  const q = `DELETE FROM usuario WHERE usuario_id = ${req.params.id}`;
-
-  db.query(q, (err) => {
-
+  db.query(`DELETE FROM usuarios WHERE id = ${req.params.id}`, (err) => {
     if (err) return res.json(err);
-
-    return res.status(200).json("Materia deletado com sucesso.");
+    return res.status(200).json({ usuarios: null, message: "Usuário deletado com sucesso!" });
   });
 };

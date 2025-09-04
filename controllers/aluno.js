@@ -29,14 +29,14 @@ export const criarTabelaAluno = () => {
 export const get = (_, res) => {
   db.query("SELECT * FROM alunos", (err, data) => {
     if (err) return res.json(err);
-    return res.status(200).json(data);
+    return res.status(200).json({ alunos: data?.rows || data, message: "Consulta de alunos realizada com sucesso!" });
   });
 };
 
 export const getById = (req, res) => {
   db.query(`SELECT * FROM alunos WHERE id = ${req.params.id}`, (err, data) => {
     if (err) return res.json(err);
-    return res.status(200).json(data[0]);
+    return res.status(200).json({ alunos: data?.rows?.[0] || data[0], message: "Consulta de aluno realizada com sucesso!" });
   });
 };
 
@@ -45,7 +45,7 @@ export const add = (req, res) => {
   const q = `INSERT INTO alunos (nome, email, telefone, matricula, qr_code, idade, blusa, calca, calcado, sexo, identidade_genero) VALUES ('${nome}', '${email}', '${telefone}', '${matricula}', '${qr_code}', '${idade}', '${blusa}', '${calca}', '${calcado}', '${sexo}', '{${identidade_genero.join(',')}}');`;
   db.query(q, (err) => {
     if (err) return res.json(err);
-    return res.status(200).json("Aluno criado com sucesso.");
+    return res.status(200).json({ alunos: null, message: "Aluno criado com sucesso!" });
   });
 };
 
@@ -54,13 +54,13 @@ export const update = (req, res) => {
   const q = `UPDATE alunos SET nome='${nome}', email='${email}', telefone='${telefone}', matricula='${matricula}', qr_code='${qr_code}', idade='${idade}', blusa='${blusa}', calca='${calca}', calcado='${calcado}', sexo='${sexo}', identidade_genero='{${identidade_genero.join(',')}}' WHERE id = ${req.params.id}`;
   db.query(q, (err) => {
     if (err) return res.json(err);
-    return res.status(200).json("Aluno atualizado com sucesso.");
+    return res.status(200).json({ alunos: null, message: "Aluno atualizado com sucesso!" });
   });
 };
 
 export const delet = (req, res) => {
   db.query(`DELETE FROM alunos WHERE id = ${req.params.id}`, (err) => {
     if (err) return res.json(err);
-    return res.status(200).json("Aluno deletado com sucesso.");
+    return res.status(200).json({ alunos: null, message: "Aluno deletado com sucesso!" });
   });
 };
